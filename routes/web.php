@@ -1,17 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+                                    //php artisan make:controller (controllername)  TO CREATE CONTROLLER
 Route::get('/', function () {
-    return Inertia::render('welcome');
+    return Inertia::render('Home');
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::post('/submit', [UserController::class, 'recipeDetails']);  //import class for UserController
+
+
+
+
+
+/*Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-});
+});*/
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
