@@ -7,10 +7,12 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
-
+    
 Route::post('/submit', [UserController::class, 'recipeDetails']);  //import class for UserController
 
-
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
