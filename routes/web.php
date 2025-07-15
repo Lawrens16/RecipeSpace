@@ -8,7 +8,7 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
     
-Route::post('/submit', [UserController::class, 'recipeDetails']);  //import class for UserController
+Route::post('/submit-recipe', [UserController::class, 'recipeDetails'])->name('submitRecipee');  //import class for UserController
 
 Route::get('/dashboard', function () {
     return view('dashboard');

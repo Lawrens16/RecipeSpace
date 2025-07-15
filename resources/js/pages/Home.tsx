@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useForm } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
+
 export default function Home() {
   const { data, setData, post, processing, errors } = useForm({
     title: '',
@@ -14,12 +16,14 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    post('/submit'); //laravel route
-  };
+    post('/submit-recipe', {
+  forceFormData: true,
+});  //laravel route
+  }
 
   return (
     <MainLayout>
-      <h1 className="text-[28px] font-bold">Submit your own recipe!</h1>
+      <h1 className="text-[28px] font-bold">Submit your own recipe!</h1>  
       <h2 className="text-[18px]">Submit your recipe online and share with others</h2>
       &nbsp;
 
@@ -32,8 +36,8 @@ export default function Home() {
       <h1 className="text-[20px] font-bold">Recipe details</h1>
       &nbsp;
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-
+      <form method="POST" encType="multipart/form-data" onSubmit={handleSubmit} className="flex flex-col gap-4">
+      
         <div className="inputDiv">
           <Label className="text-[16px]">Recipe Title</Label>
           <Input
@@ -81,7 +85,7 @@ export default function Home() {
             id="picture"
             type="file"
             className="w-[200px]"
-            onChange={(e) => setData('picture', e.target.files[0])}
+            onChange={(e) => setData('picture', e.target.files[0] || null)}
           />
         </div>
 

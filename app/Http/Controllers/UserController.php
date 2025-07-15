@@ -1,30 +1,66 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\User;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
-{
-   public function recipeDetails(Request $request)
-    {
-         dd('Form submitted!', $request->all());
-        $incomingFields = $request->validate([
-            'title' => ['required', 'string', 'min:3', 'max:255'], //could be like this
-            'servings' => 'required|string|max:255',
-            'ingredients' => 'required|string',
-            'instructions' => 'required|string',
-            'picture' => 'nullable|image|max:50000', // Max 50mb upload size
-        ]);
-
-        if ($request->hasFile('picture')) {
-            $validated['picture'] = $request->file('picture')->store('uploads', 'public');
-        }
-
-        $recipedetails = User::create($incomingFields);
-
-        return back()->with('success', 'Recipe submitted successfully!'); //response back for testing
+{  
+  public function recipeDetails(Request $request)
+   {
+       Log::info('Recipe submission route hit', ['data' => $request->all()]);
        
-    }
+       try {
+           
+           
+           Log::info('Starting validation');
+           
+           $request->validate([
+               'title' => ['required', 'string', 'min:3', 'max:255'],
+               'servings' => 'nullable|string|max:255',
+               'ingredients' => 'required|string',
+               'instructions' => 'required|string',
+               'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+           ]);
+           
+           Log::info('Validation passed');
+           
+           $imagePath = null;
+           if ($request->hasFile('picture')) {
+               Log::info('File detected, storing...');
+               $imagePath = $request->file('picture')->store('uploads', 'public');
+               Log::info('File stored at: ' . $imagePath);
+           }
+           
+           Log::info('Creating recipe record');
+           
+           // Save recipe
+           Recipe::create([
+               'title' => $request->title,
+               'servings' => $request->servings,
+               'ingredients' => $request->ingredients,
+               'instructions' => $request->instructions,
+               'picture' => $imagePath,
+           ]);
+           
+           Log::info('Recipe created successfully');
+           
+           return redirect()->route('home')->with('success', 'Recipe submitted successfully!');
+           
+       } catch (\Illuminate\Validation\ValidationException $e) {
+           Log::error('Validation failed', ['errors' => $e->errors()]);
+           return redirect()->back()->withErrors($e->errors())->withInput();
+           
+       } catch (\Exception $e) {
+           Log::error('Recipe submission failed', [
+               'message' => $e->getMessage(),
+               'file' => $e->getFile(),
+               'line' => $e->getLine(),
+               'trace' => $e->getTraceAsString()
+           ]);
+           
+           return redirect()->back()->with('error', 'Failed to submit recipe. Please try again.')->withInput();
+       }
+   }
 }
