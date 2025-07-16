@@ -11,3 +11,25 @@ body{
     flex-direction: column;
     gap: 1.25rem;
 }
+
+
+
+.recipe-grid {
+  @apply grid grid-cols-1 gap-7 w-fit;
+}
+
+.recipe-card {
+  @apply bg-white rounded-xl shadow p-4 transition-transform hover:scale-105 hover:shadow-lg cursor-pointer;
+}
+
+.recipe-image {
+  @apply w-[200px] h-[200px] object-cover rounded mb-3;
+}
+
+.recipe-title {
+  @apply text-lg font-semibold text-gray-800 text-center;
+}
+
+.recipe-section {
+    @apply flex justify-center;
+}

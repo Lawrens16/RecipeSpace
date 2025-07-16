@@ -14,6 +14,9 @@ export default function Home() {
     picture: null,
   });
 
+  const { flash } = usePage().props;
+
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     post('/submit-recipe', {
@@ -23,8 +26,8 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <h1 className="text-[28px] font-bold">Submit your own recipe!</h1>  
-      <h2 className="text-[18px]">Submit your recipe online and share with others</h2>
+      <h1 className="text-[32px] font-bold">Submit your own recipe!</h1>  
+      <h2 className="text-[18px]">Submit your recipe online and share with the community</h2>
       &nbsp;
 
       <div className="flex gap-2">

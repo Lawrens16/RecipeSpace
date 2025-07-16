@@ -5,7 +5,7 @@ use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class UserController extends Controller
+class recipeController extends Controller
 {  
   public function recipeDetails(Request $request)
    {
