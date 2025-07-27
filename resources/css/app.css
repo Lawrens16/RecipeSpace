@@ -19,11 +19,11 @@ body{
 }
 
 .recipe-card {
-  @apply bg-white rounded-xl shadow p-4 transition-transform hover:scale-105 hover:shadow-lg cursor-pointer;
+  @apply bg-white rounded-xl shadow p-4 transition-transform hover:scale-105 hover:shadow-lg cursor-pointer w-[280px] sm:w-[320px] lg:w-[360px];
 }
 
 .recipe-image {
-  @apply w-[200px] h-[200px] object-cover rounded mb-3;
+  @apply w-full h-[200px] object-cover rounded mb-3;
 }
 
 .recipe-title {
