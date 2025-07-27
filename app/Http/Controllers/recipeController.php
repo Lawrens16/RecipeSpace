@@ -4,9 +4,17 @@ use App\Models\User;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 
 class recipeController extends Controller
 {  
+
+    public function getRecipes(){
+        \Log::info('getRecipes() method was called');
+        $recipes = Recipe::all();
+        return Inertia::render("RecipePage",compact('recipes'));
+    }
+
   public function recipeDetails(Request $request)
    {
        Log::info('Recipe submission route hit', ['data' => $request->all()]);

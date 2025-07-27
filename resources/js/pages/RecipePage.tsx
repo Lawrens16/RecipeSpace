@@ -1,7 +1,23 @@
 import MainLayout from '../layouts/MainLayout';
 import React from 'react';
+import { usePage } from '@inertiajs/react';
+
+
+interface Recipes{
+    title: string;
+    servings?: string;
+    ingredients: string;
+    instructions: string;
+    picture?: string | null;
+}   
+
+interface pageProps{
+    recipes: Recipes[];
+}
+
 export default function RecipePage() {
 
+    const {recipes} = usePage().props as pageProps;
     return(
         <MainLayout>
             <div>
@@ -61,6 +77,7 @@ export default function RecipePage() {
                     </ul>
                 </section>
             </div>
+
         </MainLayout>
     );
 }

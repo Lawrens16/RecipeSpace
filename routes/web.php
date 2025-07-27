@@ -8,9 +8,7 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/recipe-page', function () {
-    return Inertia::render('RecipePage');
-})->name('recipepage');
+Route::get('/recipe-page', [recipeController::class, 'getRecipes'])->name('recipepage');
 
 Route::get('/about', function () {
     return Inertia::render('About');
