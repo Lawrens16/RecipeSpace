@@ -12,13 +12,13 @@ interface Recipes{
     picture?: string | null;
 }   
 
-interface pageProps{
+interface PageProps{
     recipes: Recipes[];
 }
 
 export default function RecipePage() {
 
-    const {recipes} = usePage().props as pageProps;
+    const {recipes} = usePage().props as unknown as  PageProps;
     return(
         <MainLayout>
             <div>
