@@ -4,6 +4,9 @@ export default function AuthLayout({ children, title, description, ...props }: {
     return (
         <AuthLayoutTemplate title={title} description={description} {...props}>
             {children}
+            <footer className="p-4 bg-[hsl(345,86%,49%)] text-center text-white">
+            © 2025 RecipeSpace
+            </footer>
         </AuthLayoutTemplate>
     );
 }

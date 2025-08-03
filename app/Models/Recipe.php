@@ -17,4 +17,6 @@ class Recipe extends Model
         'instructions',
         'picture',
     ];
+
+    
 }

@@ -28,7 +28,7 @@ export default function MainLayout({ children }: { children?: React.ReactNode })
               <ul className="flex gap-18 ml-160 ">
                 <li>
                   <NavigationMenuLink asChild>
-                    <Link href="/" className="text-white text-[24px] font-bold">Submit A Recipe</Link>
+                    <Link href="/home" className="text-white text-[24px] font-bold">Submit A Recipe</Link>
                   </NavigationMenuLink>
                 </li>
                 <li>
@@ -41,6 +41,7 @@ export default function MainLayout({ children }: { children?: React.ReactNode })
                     <Link href="/about" className="text-white text-[24px] font-bold">About</Link>
                   </NavigationMenuLink>
                 </li>
+              
               </ul>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -51,7 +52,7 @@ export default function MainLayout({ children }: { children?: React.ReactNode })
         {children}
       </main>
 
-      <footer className="p-4 bg-[hsl(345,86%,49%)] text-center">
+      <footer className="p-4 bg-[hsl(345,86%,49%)] text-center text-white">
         © 2025 RecipeSpace
       </footer>
     </div>
